@@ -1,6 +1,7 @@
 import pandas as pd
-from evidently.report import Report
-from evidently.metric_preset import DataDriftPreset, DataQualityPreset
+from evidently import ColumnMapping
+from evidently.metrics import DataDriftTable, DataQualityTable
+from evidently.report import Report as EvidentlyReport
 import os
 
 def main():
@@ -11,9 +12,9 @@ def main():
     test_df = pd.read_csv("data/test.csv")
     
     # Create report
-    report = Report(metrics=[
-        DataDriftPreset(),
-        DataQualityPreset()
+    report = EvidentlyReport(metrics=[
+        DataDriftTable(),
+        DataQualityTable()
     ])
     
     report.run(reference_data=train_df, current_data=test_df)
