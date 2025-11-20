@@ -1,0 +1,48 @@
+name: ML Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  ml-pipeline:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Preprocess data
+      run: python src/preprocess.py
+    
+    - name: Validate with Deepchecks
+      run: python src/validate_deepchecks.py
+    
+    - name: Train model
+      run: python src/train.py
+    
+    - name: Evaluate model
+      run: python src/evaluate.py
+    
+    - name: Drift analysis with Evidently
+      run: python src/drift_evidently.py
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: ml-artifacts
+        path: |
+          models/
+          reports/
+

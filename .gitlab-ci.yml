@@ -1,0 +1,53 @@
+stages:
+  - preprocess
+  - validate
+  - train
+  - evaluate
+  - drift
+
+image: python:3.12-slim
+
+before_script:
+  - pip install -r requirements.txt
+
+preprocess:
+  stage: preprocess
+  script:
+    - python src/preprocess.py
+  artifacts:
+    paths:
+      - data/
+
+validate:
+  stage: validate
+  script:
+    - python src/validate_deepchecks.py
+  artifacts:
+    paths:
+      - reports/
+
+train:
+  stage: train
+  script:
+    - python src/train.py
+  artifacts:
+    paths:
+      - models/
+      - mlruns/
+
+evaluate:
+  stage: evaluate
+  script:
+    - python src/evaluate.py
+  artifacts:
+    paths:
+      - reports/
+
+drift:
+  stage: drift
+  script:
+    - python src/drift_evidently.py
+  artifacts:
+    paths:
+      - reports/
+
