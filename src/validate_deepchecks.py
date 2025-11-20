@@ -18,7 +18,8 @@ def main():
     
     # Save report
     os.makedirs("reports", exist_ok=True)
-    result.save_as_html("reports/deepchecks_report.html")
+    # Save as HTML with embedded resources to avoid CDN dependencies
+    result.save_as_html("reports/deepchecks_report.html", connected=True)
     
     print("Deepchecks validation completed. Report saved to reports/deepchecks_report.html")
 
