@@ -4,7 +4,7 @@ scipy==1.11.4
 scikit-learn==1.4.0
 mlflow==2.16.2
 cryptography==42.0.0
-evidently==0.4.45
+evidently==0.4.40
 deepchecks==0.18.1
 seaborn==0.13.2
 matplotlib==3.8.2
