@@ -9,20 +9,17 @@ def main():
     
     df = pd.read_csv("data/train.csv")
     
-    # Create Deepchecks dataset
+    # Создание Deepchecks датасета
     ds = Dataset(df, label="target", cat_features=[])
     
-    # Run data integrity suite
+    # Запуск Integrity Suite
     suite = data_integrity()
     result = suite.run(ds)
     
-    # Save report
+    # Сохранение отчета
     os.makedirs("reports", exist_ok=True)
-    # Save as HTML with embedded resources to avoid CDN dependencies
     result.save_as_html("reports/deepchecks_report.html", connected=True)
     
-    print("Deepchecks validation completed. Report saved to reports/deepchecks_report.html")
-
 if __name__ == "__main__":
     main()
 
