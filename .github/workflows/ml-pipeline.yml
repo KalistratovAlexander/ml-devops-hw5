@@ -39,7 +39,7 @@ jobs:
       run: python src/drift_evidently.py
     
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ml-artifacts
         path: |
