@@ -33,7 +33,7 @@ def main():
         mlflow.log_metric("precision", precision)
         mlflow.log_metric("recall", recall)
     
-    # Save report
+    # Сохранение отчета
     os.makedirs("reports", exist_ok=True)
     metrics = {
         "accuracy": acc,
