@@ -13,19 +13,19 @@ def main():
     X = df.drop(columns=["target"])
     y = df["target"]
     
-    # MLflow tracking
+    # MLflow логирование
     mlflow.set_experiment("iris_classification")
     
     with mlflow.start_run():
         n_estimators = 100
         max_depth = 5
         
-        # Log params
+        # Логирование параметров
         mlflow.log_param("n_estimators", n_estimators)
         mlflow.log_param("max_depth", max_depth)
         mlflow.log_param("random_state", 42)
         
-        # Train
+        # Обучение модели
         model = RandomForestClassifier(
             n_estimators=n_estimators,
             max_depth=max_depth,
@@ -33,15 +33,13 @@ def main():
         )
         model.fit(X, y)
         
-        # Log model
+        # Логирование модели
         mlflow.sklearn.log_model(model, "model")
         
-        # Save locally
+        # Сохранение модели локально
         os.makedirs("models", exist_ok=True)
         with open("models/model.pkl", "wb") as f:
             pickle.dump(model, f)
         
-        print("Model trained and logged to MLflow")
-
 if __name__ == "__main__":
     main()

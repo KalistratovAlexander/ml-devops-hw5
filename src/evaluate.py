@@ -16,16 +16,16 @@ def main():
     with open("models/model.pkl", "rb") as f:
         model = pickle.load(f)
     
-    # Predict
+    # Предсказание
     predictions = model.predict(X)
     
-    # Metrics
+    # Метрики
     acc = accuracy_score(y, predictions)
     f1 = f1_score(y, predictions, average='weighted')
     precision = precision_score(y, predictions, average='weighted')
     recall = recall_score(y, predictions, average='weighted')
     
-    # MLflow logging
+    # MLflow логирование
     mlflow.set_experiment("iris_classification")
     with mlflow.start_run():
         mlflow.log_metric("accuracy", acc)
@@ -33,7 +33,7 @@ def main():
         mlflow.log_metric("precision", precision)
         mlflow.log_metric("recall", recall)
     
-    # Сохранение отчета
+    # Сохранение метрик
     os.makedirs("reports", exist_ok=True)
     metrics = {
         "accuracy": acc,
@@ -44,8 +44,6 @@ def main():
     
     with open("reports/metrics.json", "w") as f:
         json.dump(metrics, f, indent=4)
-        
-    print(f"Evaluation: Accuracy={acc:.3f}, F1={f1:.3f}")
 
 if __name__ == "__main__":
     main()

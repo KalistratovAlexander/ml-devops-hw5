@@ -10,7 +10,7 @@ def main():
     train_df = pd.read_csv("data/train.csv")
     test_df = pd.read_csv("data/test.csv")
     
-    # Create report
+    # Создание отчета
     report = Report(metrics=[
         DataDriftPreset(),
         DataQualityPreset()
@@ -18,12 +18,9 @@ def main():
     
     report.run(reference_data=train_df, current_data=test_df)
     
-    # Save report
+    # Сохранение отчета
     os.makedirs("reports", exist_ok=True)
     report.save_html("reports/evidently_report.html")
     
-    print("Evidently drift analysis completed. Report saved to reports/evidently_report.html")
-
 if __name__ == "__main__":
     main()
-
