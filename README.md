@@ -14,7 +14,7 @@
 ## Запуск
 ```bash
 pip install -r requirements.txt
-dvc pull
+dvc pull || true
 dvc repro
 mlflow ui --backend-store-uri sqlite:///mlflow.db
 ```
@@ -22,8 +22,8 @@ mlflow ui --backend-store-uri sqlite:///mlflow.db
 Где смотреть MLflow UI: откройте http://127.0.0.1:5000 в браузере.
 
 ## Описание пайплайна
-- `prepare`: читает сырые данные `data/raw/iris.csv` (под управлением DVC), делает train/test split по `params.yaml`, сохраняет `data/train.csv`, `data/test.csv`.
-- `train`: обучает `RandomForestClassifier` с параметрами из `params.yaml`, логирует параметры, метрики (accuracy, f1) и артефакты (модель) в MLflow, сохраняет `models/model.pkl`.
+- `prepare`: читает сырые данные `data/raw/iris.csv`, делит на train и test по `params.yaml`, сохраняет `data/train.csv`, `data/test.csv`.
+- `train`: обучает `RandomForestClassifier` с параметрами из `params.yaml`, логирует параметры, метрики (accuracy, f1) и артефакты в MLflow, сохраняет `models/model.pkl`.
 
 Запуск воспроизводимости:
 ```bash

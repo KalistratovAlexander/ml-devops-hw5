@@ -4,7 +4,6 @@ stages:
     deps:
     - src/preprocess.py
     - params.yaml
-    - data/raw/iris.csv
     outs:
     - data/train.csv
     - data/test.csv
