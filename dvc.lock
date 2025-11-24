@@ -3,6 +3,10 @@ stages:
   prepare:
     cmd: python src/preprocess.py
     deps:
+    - path: data/raw/iris.csv
+      hash: md5
+      md5: 4d301abed5efe50eccda350cde38e0eb
+      size: 2777
     - path: params.yaml
       hash: md5
       md5: e6808906cb84792322fbffb9ccc8bac8
