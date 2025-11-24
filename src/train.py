@@ -28,6 +28,7 @@ def main():
     random_state = params["model"]["random_state"]
     
     # MLflow логирование
+    mlflow.set_tracking_uri("sqlite:///mlflow.db")
     mlflow.set_experiment("iris_classification")
     
     with mlflow.start_run():
