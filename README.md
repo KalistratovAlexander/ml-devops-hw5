@@ -19,7 +19,7 @@ dvc repro
 mlflow ui --backend-store-uri sqlite:///mlflow.db
 ```
 
-Где смотреть MLflow UI: откройте http://127.0.0.1:5000 в браузере.
+MLflow UI доступен по адресу http://127.0.0.1:5000.
 
 ## Описание пайплайна
 - `prepare`: читает сырые данные `data/raw/iris.csv`, делит на train и test по `params.yaml`, сохраняет `data/train.csv`, `data/test.csv`.
@@ -32,7 +32,7 @@ dvc repro
 
 ## Версионирование данных
 Проект использует DVC:
-- артефакты `data/train.csv`, `data/test.csv`, `models/model.pkl` — как `outs` стадий DVC;
+- артефакты `data/train.csv`, `data/test.csv`, `models/model.pkl`;
 - локальное удалённое хранилище можно добавить командой:
 ```bash
 dvc remote add -d local ./dvcstore
