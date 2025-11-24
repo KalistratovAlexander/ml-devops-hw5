@@ -16,9 +16,8 @@ models/*.pkl
 # MLflow
 mlruns/
 
-# Reports
-reports/*.html
-reports/*.json
+# Notebooks
+notebooks/
 
 # IDE
 .idea/

@@ -1,15 +1,20 @@
 import pandas as pd
-from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 import os
+import yaml
 
 def main():
-    # Загрузка данных
-    data = load_iris(as_frame=True)
-    df = data.frame
+    # Загрузка параметров
+    with open("params.yaml", "r") as f:
+        params = yaml.safe_load(f)
+    test_size = params["split"]["test_size"]
+    random_state = params["split"]["random_state"]
+
+    # Загрузка сырых данных из CSV (версионируется через DVC)
+    df = pd.read_csv("data/raw/iris.csv")
     
     # Сплит
-    train, test = train_test_split(df, test_size=0.2, random_state=42)
+    train, test = train_test_split(df, test_size=test_size, random_state=random_state)
     
     # Сохранение
     os.makedirs("data", exist_ok=True)
